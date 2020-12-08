@@ -37,6 +37,8 @@ jobs:
           npm install
           npm install got
           npm install tough-cookie
+          npm install crypto-js
+          npm install http-server
       - name: '运行 【企鹅读书】'
         run: |
           node QQread.js
