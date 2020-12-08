@@ -1,17 +1,19 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-acti
-  
-name: 企鹅读书
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: QQread
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/11 0-16 * * *'
+    - cron: '*/11 0-16 * * *'
   watch:
     types: started
-
+  repository_dispatch:
+    types: QQread
 jobs:
   build:
+
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     env:
@@ -21,22 +23,32 @@ jobs:
         
     steps:
       - name: Checkout
-        run: |
-          git clone https://github.com/ziye12/JavaScript.git ~/JavaScript
-      - name: Use Node.js 12.x
+        uses: actions/checkout@v2
+        with:
+          repository: tianya908/ray
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node_modules
+        uses: actions/cache@v2 # 使用 GitHub 官方的缓存 Action。
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
       - name: npm install
         if: env.QQREAD_TIMEHD
         run: |
-          cd ~/JavaScript
-          npm install
+          npm install download
+          npm install crypto-js
+          npm install http-server
+          npm install got
+          npm install tough-cookie
       - name: '运行 【企鹅读书】'
         if: env.QQREAD_TIMEHD
         run: |
-          cd ~/JavaScript
-          node Task/qqreads.js
+          node QQread.js
         env:
           
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
