@@ -1,25 +1,20 @@
-  "name": "ray",
+{
+  "name": "qq",
   "version": "1.0.0",
   "description": "",
   "main": "QQread.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tianya908/ray.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tianya908/ray/issues"
-  },
-  "homepage": "https://github.com/tianya908/ray#readme",
   "dependencies": {
     "crypto-js": "^4.0.0",
+    "download": "^8.0.0",
     "got": "^11.8.0",
     "http-server": "^0.12.3",
+    "request": "^2.88.2",
     "tough-cookie": "^4.0.0"
   }
 }
