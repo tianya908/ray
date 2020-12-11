@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "crypto-js": "^4.0.0",
-    "download": "^8.0.0",
     "got": "^11.8.0",
     "http-server": "^0.12.3",
-    "request": "^2.88.2",
+#   "download": "^8.0.0",
+#   "request": "^2.88.2",
     "tough-cookie": "^4.0.0"
   }
 }
